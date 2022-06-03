@@ -5,6 +5,8 @@
 #include <vector>
 #include <random>
 
+using namespace std;
+
 extern "C" {
 #include "matrix.c"
 }
