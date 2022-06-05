@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <vector>
-#include <random>
 #include <algorithm>
 #include <cmath>
 #include <tuple>
@@ -41,8 +40,9 @@ tuple<double,double,double> calculateLine(vector<Point> s) {
 }
 
 double findError(Point p, double A, double B, double C) {
-    double d;
-    d = abs(A*pow(p.x, 2.) + B*p.x + C - p.y) / sqrt(A*A + B*B);
+    double d, y_new;
+    y_new = A*pow(p.x, 2.0) + B*p.x + C;
+    d = ((y_new - p.y) / p.y) * 100;
     return d;
 }
 
@@ -52,8 +52,6 @@ void findLS(vector<Point> points) {
     double A, B, C, A_ans, B_ans, C_ans;
     double error, prevError;
 
-    // N = The number of samples to get a 99% chance the line has no outliers
-    //N = ceil( log10(1 - 0.99) / log10(1 - pow(1-0.3, 3.0)) );
     N = 2500;
     j = 0;
 
@@ -61,8 +59,6 @@ void findLS(vector<Point> points) {
     vector<Point> randomSamples(3);
     vector<Point> remainders = points;
 
-
-    // Finding best coeffs from 1000 random iterations
     while(j < N) {
         // Selection of 3 random points
         random_shuffle(points.begin(), points.end());
@@ -86,7 +82,6 @@ void findLS(vector<Point> points) {
 
         j++;
     }
-    //cout << A << " " << B << " " << C << "\n";
     double e;
     int count;
     vector<Point> retained;
