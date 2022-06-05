@@ -15,7 +15,7 @@ int main() {
     double x, y;
 
     string line, input;
-    ifstream file("test_prog4/input_1.txt");
+    ifstream file("test_prog4/input_2.txt");
     if(file.is_open()) {
         Point temp;
         while(getline(file, line)) {
